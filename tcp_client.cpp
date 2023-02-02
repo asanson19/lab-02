@@ -14,15 +14,16 @@ int main(int argc, char const *argv[])
 { 
 	// check to see if user input is valid
 	char socket_read_buffer[1024];
-	
+
 	// TODO: Fill out the server ip and port
-	std::string server_ip = "";
-	std::string server_port = "";
+	std::string server_ip = "127.0.0.1";
+	std::string server_port = "1119";
 
 	int opt = 1;
 	int client_fd = -1;
 
 	// TODO: Create a TCP socket()
+    socket(AF_INET, SOCK_STREAM, 0 );
 
 	// Enable reusing address and port
 	if (setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) { 
@@ -34,7 +35,7 @@ int main(int argc, char const *argv[])
 		printf("Error- Socket setup failed");
 		return -1;
 	}
-	
+
 	// Helping you out by pepping the struct for connecting to the server
 	struct addrinfo hints;
 	struct addrinfo *server_addr;
@@ -44,10 +45,23 @@ int main(int argc, char const *argv[])
 	getaddrinfo(server_ip.c_str(), server_port.c_str(), &hints, &server_addr);
 
 	// TODO: Connect() to the server (hint: you'll need to use server_addr)
+    connect(client_fd, *server_addr, sizeof(server_addr));
+
 	// TODO: Retreive user input
+    cin >> socket_read_buffer;
+
 	// TODO: Send() the user input to the server
+    send(client_fd, socket_read_buffer,1024);
+
 	// TODO: Recieve any messages from the server and print it here. Don't forget to make sure the string is null terminated!
+    string message;
+    
+    message = read(client_fd, socket_read_buffer,1023);
+
+    cout << message;
+
 	// TODO: Close() the socket
+    close(client_fd);
 
 	return 0; 
 } 
