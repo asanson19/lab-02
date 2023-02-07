@@ -8,6 +8,7 @@
 ## Lab Question Answers
 
 Evaluating TCP and UDP Q&A
+
 Question 1: How did the reliability of UDP change when you added 50% loss to your local
 environment? Why did this occur?
 It received faster but some of the packets were lost. That’s because there’s no confirmation of data transfer when using UDP. 
@@ -23,6 +24,7 @@ The speed of the TCP response was slower. It’s because it keeps sending all pa
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 tcp_server.c Q&A
+
 1. What is argc and *argv[]?
 argc is the count of inputs from the command line and argv is an array of command line inputs.
 
